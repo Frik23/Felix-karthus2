@@ -1,0 +1,66 @@
+--[[
+Felix Teemo
+]]--
+
+function Teemo()
+    -- Print to the chat area
+    PrintChat("Best Teemo script ever Loading")
+end
+ 
+function OnLoad()
+	SayHello()
+end
+
+
+if not myHero then
+  myHero = GetMyHero()
+end
+if myHero.charName ~= "Teemo" then return end
+
+-- We will store the target selector on this variable
+local ts
+ 
+function OnLoad()
+	-- Menu
+	Config = scriptConfig("MENU TITLE", "Felix Teemo")
+	Config:addParam("drawCircle", "Draw Circle", SCRIPT_PARAM_ONOFF, true)
+	Config:addParam("combo", "Combo mode", SCRIPT_PARAM_ONKEYDOWN, false, string.byte(" "))
+ 
+ 
+	ts = TargetSelector(TARGET_LOW_HP_PRIORITY,500)
+end
+ 
+function OnTick()
+	ts:update()
+	
+	--Enemy near?
+	if (ts.target ~= nil) then
+ 
+		if (Config.combo) then
+			-- Can we cast Q ?
+			if (myHero:CanUseSpell(_Q) == READY) then
+				-- Cast spell on enemy
+				CastSpell(_Q, ts.target)
+			end
+ 
+			-- Can we cast W ?
+			if (myHero:CanUseSpell(_W) == READY) then
+				-- Cast spell on enemy
+				CastSpell(_W)
+			end
+			
+		end
+		
+	end
+end
+ 
+-- Drawing graphics
+function OnDraw()
+	--Draw circles only if activated on menu
+	if (Config.drawCircle) then
+		DrawCircle(myHero.x, myHero.y, myHero.z, 580, 0x111111)
+	end
+	
+		end
+	end
+end
