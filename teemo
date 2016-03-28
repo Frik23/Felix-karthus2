@@ -19,7 +19,7 @@ function Teemo()
 end
  
 function OnLoad()
-	SayHello()
+	Teemo()
 end
 
 
