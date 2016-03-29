@@ -36,6 +36,24 @@ function OnLoad()
 	Config = scriptConfig("MENU TITLE", "Felix Teemo")
 	Config:addParam("drawCircle", "Draw Circle", SCRIPT_PARAM_ONOFF, true)
 	Config:addParam("combo", "Combo mode", SCRIPT_PARAM_ONKEYDOWN, false, string.byte(" "))
+	Config:addSubMenu("Combo Setings", "combo")
+       
+        Config.combo:addParam("useq", "Use Q", SCRIPT_PARAM_ONKEYDOWN, false, 32)
+        Config.combo:addParam("usew", "Use W", SCRIPT_PARAM_ONKEYDOWN, false, 32)
+        Config.combo:addParam("manaw", "Min % Mana for W", SCRIPT_PARAM_SLICE, 45, 0, 100, 0)
+ 
+        Config:addSubMenu("Harass Settings", "harass")
+ 
+        Config.harass:addParam("useq", "Use Q", SCRIPT_PARAM_ONKEYDOWN, false, c)
+        Config.harass:addParam("usew","Use W", SCRIPT_PARAM_ONKEYDOWN, false, c)
+        Config.harass:addParam("manaw", "Min % Mana for W", SCRIPT_PARAM_SLICE, 45, 0, 100, 0)
+ 
+       Config:addSubMenu("Killsteal", "killsteal")
+ 
+       Config.killsteal:addParam("useq", "Use Q", SCRIPT_PARAM_ONOFF, true)
+       
+   
+   UPL:AddToMenu(Config)
  
  
 	ts = TargetSelector(TARGET_LOW_HP_PRIORITY,500)
